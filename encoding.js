@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 */
 
-modules.exports = Encoder;
+module.exports = Encoder;
 
 function Encoder(codepage) {
     var o = {};
@@ -35,7 +35,7 @@ function Encoder(codepage) {
     }
 
     o.decode = function decode(input) {
-        return convert_2_utf8(input, input.len, translator).toString('utf8');
+        return convert_2_utf8(input, input.length, translator).toString('utf8');
     }
     return o;
 }
@@ -83,7 +83,7 @@ var t_cp1250 = [
     ];
 
 
-var t_cp1252[32] = [ 
+var t_cp1252 = [ 
     /* 0x80 */
     0x20ac, 0x0000, 0x201a, 0x0192, 0x201e, 0x2026, 0x2020, 0x2021, 
     0x02c6, 0x2030, 0x0160, 0x2039, 0x0152, 0x0000, 0x017d, 0x0000,
@@ -149,6 +149,7 @@ function convert_2_utf8(input, len, unicodefunction) {
     if (!Buffer.isBuffer(input)) {
         input = new Buffer(input, 'binary');
     }
+    len = len || input.length;
 
     // calculate new buffer length
     var i, outpos, ac = 0;
